@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Theme Simply Me</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+    <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/home">Me</a>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/login">login</a></li>
+              <li><a href="/register">registration</a></li>
+              <li><a href="#"></a></li>
+            </ul>
+          </div>
+        </div>
+      </nav> 
+      <style>
+        body {
+          font-family: Arial, Helvetica, sans-serif;
+          background-color:chartreuse;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+
+        /* Add padding to containers */
+        .container {
+          padding: 16px;
+          background-color: white;
+        }
+
+        input[type=text], input[type=password] {
+          width: 100%;
+          padding: 15px;
+          margin: 5px 0 22px 0;
+          display: inline-block;
+          border: none;
+          background: #f1f1f1;
+        }
+
+        input[type=text]:focus, input[type=password]:focus {
+          background-color: #ddd;
+          outline: none;
+        }
+
+        /* Overwrite default styles of hr */
+        hr {
+          border: 1px solid #f1f1f1;
+          margin-bottom: 25px;
+        }
+
+        /* Set a style for the submit button */
+        .registerbtn {
+          background-color: #4CAF50;
+          color: white;
+          padding: 16px 20px;
+          margin: 8px 0;
+          border: none;
+          cursor: pointer;
+          width: 100%;
+          opacity: 0.9;
+        }
+
+        .registerbtn:hover {
+          opacity: 1;
+        }
+
+        /* Add a blue text color to links */
+        a {
+          color: dodgerblue;
+        }
+
+        /* Set a grey background color and center the text of the "sign in" section */
+        .signin {
+          background-color: #f1f1f1;
+          text-align: center;
+        }
+        .footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: c
+      </style>
+<div>
+  {% for message in messages %}
+  <h3> {{message}} </h3>
+  {% endfor %}
+</div>
+      <form action="/processed" method="POST">
+        {% csrf_token %}
+        <div class="container">
+          <h2 >Register Form </h2><br/>
+          <p>Please fill in this form to create an account.</p>
+          <hr>
+      
+          <label for="name"><b>Name</b></label>
+          <input type="text" placeholder="Enter Name" name="name" required>
+      
+          <label for="email"><b>Email</b></label>
+          <input type="text" placeholder="Enter Email" name="email" required>
+      
+          <label for="psw"><b>Password</b></label>
+          <input type="text" placeholder="Enter Password" name="pwd" required>
+      
+          <label for="psw-repeat"><b>Repeat Password</b></label>
+          <input type="text" placeholder="Repeat Password" name="cpwd" required>
+          <hr>
+          <button type="submit" class="registerbtn">Register</button>
+        </div>
+        
+        <div class="container signin">
+          <p>Already have an account? <a href="/login">Sign in</a></p>
+        </div>
+      </form>
+      <div>
+        &nbsp;
+      </div>
+</div>
+<div class="footer">
+  <p><div class="col-xs-12 footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://www.jweb.co.in/"> Jweb Solutions </a></div></p>
+</div>
+</body>
+</html>

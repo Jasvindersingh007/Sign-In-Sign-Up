@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Theme Simply Me</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color:chartreuse;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Add padding to containers */
+    .container {
+      padding: 16px;
+      background-color: white;
+    }
+
+    input[type=text], input[type=password] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    input[type=text]:focus, input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+
+    /* Overwrite default styles of hr */
+    hr {
+      border: 1px solid #f1f1f1;
+      margin-bottom: 25px;
+    }
+
+    /* Set a style for the submit button */
+    .registerbtn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 16px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+    }
+
+    .registerbtn:hover {
+      opacity: 1;
+    }
+
+    /* Add a blue text color to links */
+    a {
+      color: dodgerblue;
+    }
+
+    /* Set a grey background color and center the text of the "sign in" section */
+    .signin {
+      background-color: #f1f1f1;
+      text-align: center;
+    }
+    .footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+}
+
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+    <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/home">Me</a>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+              {% if user.is_authenticated %}
+              <li> hello, {{user.username}}</li>
+              <li><a href="/logout">Logout</a></li>
+              {% else %}
+              <li><a href="/login">login</a></li>
+              <li><a href="/register">registration</a></li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+</div>
+{% if user.is_authenticated %}
+<!-- second container-->
+<div class="container">
+  
+  <div>Dashboard></div>
+  <div class="col-xs-2" height="100%";>
+    <button onclick="add()" type="button" class="cancelbtn">Add</button>
+    <button onclick="dis()" type="button" class="cancelbtn">Display</button>
+  </div>
+  <script>
+    window.onload = function(){
+      document.getElementById("add").style.display ='none';
+      document.getElementById("dis").style.display ='none';
+    }
+  </script>
+  <script>
+    function add() {
+      var x = document.getElementById("add");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+  </script>
+  <script>
+    function dis() {
+      var x = document.getElementById("dis");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+  </script>
+  <div class="col-xs-10" height="100%";>
+    <div id="add">
+    <form action="/empdata" method="POST">
+      {% csrf_token %}
+      <div class="col-xs-12">
+        <h2 style="text-align: center;">Add Employee</h2>
+        <label for="name"><b>Employee Name</b></label>
+        <input type="text" placeholder="Enter Name" name="ename" required>
+    
+        <label for="Salary"><b>Salary</b></label>
+        <input type="text" placeholder="Enter Salary" name="esalary" required>
+    
+        <label><b>Date of Joining</b></label>
+        <input type="text" placeholder="yyyy-mm-dd" name="edoj" required>
+  
+        <hr>
+        <button type="submit" class="registerbtn">add</button>
+      </div>
+    </form>
+    </div><!--//add-->
+    <div id="dis">
+    
+            
+      {% for e in es %}
+      <table>
+        <tr><td> </td></tr>
+        <tr>
+          <td>{{e.name}}</td>
+        </tr>
+        <tr>
+          <td>{{e.salary}}</td>
+        </tr>
+        <tr>
+          <td>{{e.doj}}</td>
+        </tr>
+      </table>
+      {% endfor %}
+    </div>
+{% else %}
+      <div>
+        <hr/>
+      </div>
+  </div><!--//col-xs-12-->
+</div><!--//container-->
+{% endif %}
+
+<div class="footer">
+  <p><div class="col-xs-12 footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://Jweb.co.in/"> Jweb Solutions </a></div></p>
+</div>
+</div>
+</body>
+</html> 
